@@ -81,33 +81,37 @@ $.fn.mask = function(mask) {
                     pos = getCursor(el);
                     buffer = (buffer.length == 0) ? placeholder.slice() : buffer;
                     
-                    if (k == 8) {
+                    switch(k) {
                         
-                        buffer[pos - 1] = getPlaceholder(pos - 1);
-                        pos--;
-                    } else if (k == 46) {
+                        case 8:
+                            buffer[pos - 1] = getPlaceholder(pos - 1);
+                            pos--;
+                        break;
                         
-                        buffer[pos] = getPlaceholder(pos);
-                    } else {
-                    
-                    var maskDig = mask.charAt(pos),
-                        translation = options.translation[maskDig];
+                        case 46:
+                            buffer[pos] = getPlaceholder(pos);
+                        break;
                         
-                        if(translation){
-                            
-                            if(value.match(translation.pattern)) {
-                                buffer[pos] = value;
-                                pos++; 
-                            }
-
-                        } else {
-                            
-                            buffer[pos] = maskDig;
-                            
-                        }
+                        default:
+                            var maskDig = mask.charAt(pos),
+                                translation = options.translation[maskDig];
                         
-                        var temp_pos = buffer.indexOf(options.place);
-                        pos = temp_pos;
+                                if(translation){
+                                    
+                                    if(value.match(translation.pattern)) {
+                                        buffer[pos] = value;
+                                        pos++; 
+                                    }
+        
+                                } else {
+                                    
+                                    buffer[pos] = maskDig;
+                                    
+                                }
+                                
+                                var temp_pos = buffer.indexOf(options.place);
+                                pos = temp_pos;
+                        
                     }
                         return buffer.join('');
                 }
