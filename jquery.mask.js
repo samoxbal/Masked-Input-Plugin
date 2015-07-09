@@ -79,7 +79,7 @@ $.fn.mask = function(mask) {
                     var k = e.which || e.keyCode || e.key;
                     var value = String.fromCharCode(k);
                     pos = getCursor(el);
-                    buffer = (buffer.length == 0) ? placeholder.slice() : buffer;
+                    buffer = (!buffer.length) ? placeholder.slice() : buffer;
                     
                     switch(k) {
                         
@@ -108,7 +108,6 @@ $.fn.mask = function(mask) {
                                     
                                     if(value.match(translation.pattern)) {
                                         buffer[pos] = value;
-                                        pos++; 
                                     }
         
                                 } else {
