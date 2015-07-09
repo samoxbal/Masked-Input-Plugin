@@ -91,6 +91,14 @@ $.fn.mask = function(mask) {
                         case 46:
                             buffer[pos] = getPlaceholder(pos);
                         break;
+
+                        case 39:
+                            pos++;
+                        break;
+                        
+                        case 37:
+                            pos--;
+                        break;
                         
                         default:
                             var maskDig = mask.charAt(pos),
