@@ -85,7 +85,19 @@ $.fn.mask = function(mask) {
                         
                         case 8:
                             buffer[pos - 1] = getPlaceholder(pos - 1);
-                            pos--;
+                            var i = pos;
+                            while(i > 0) {
+                                
+                                pos--;
+                                i--;
+                                
+                                var maskDig = mask.charAt(pos - 1),
+                                    translation = options.translation[maskDig];
+                                
+                                if (translation) {
+                                    if ((translation.pattern).test(buffer[pos - 1])) break;
+                                }
+                            }
                         break;
                         
                         case 46:
