@@ -115,6 +115,7 @@ $.fn.mask = function(mask) {
                                     if ((translation.pattern).test(buffer[pos])) break;
                                 }
                             }
+                            if (pos == mask.length + 1) setCursor(el, pos);
                         break;
 
                         case 39:
