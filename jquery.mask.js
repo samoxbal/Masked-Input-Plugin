@@ -3,6 +3,7 @@ $.fn.mask = function(mask) {
         var placeholder = [];
         var buffer = [];
         var pos = 0;
+        var start_pos = 0;
         var options = {
             translation: {
                 '0': {pattern: /\d/},
@@ -55,6 +56,7 @@ $.fn.mask = function(mask) {
                     var symbol = mask.charAt(i);
                     if(/^[0\*a]*$/.test(symbol)) {
                        pos = (pos == 0) ? i : pos;
+                       start_pos = pos;
                         placeholder.push(options.place);
                     } else {
                         placeholder.push(symbol);
@@ -86,7 +88,7 @@ $.fn.mask = function(mask) {
                         case 8:
                             buffer[pos - 1] = getPlaceholder(pos - 1);
                             var i = pos;
-                            while(i > 0) {
+                            while(i > start_pos) {
                                 
                                 pos--;
                                 i--;
@@ -98,6 +100,7 @@ $.fn.mask = function(mask) {
                                     if ((translation.pattern).test(buffer[pos - 1])) break;
                                 }
                             }
+                            if (pos == start_pos) setCursor(el, pos);
                         break;
                         
                         case 46:
